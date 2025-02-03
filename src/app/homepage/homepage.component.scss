@@ -1,0 +1,116 @@
+.homepage {
+  background-image: radial-gradient(#ed95ed, #f579f5, #800080);
+  color: #fff;
+  padding: 2rem 4rem;
+  height: 100vh;
+  display: flex;
+
+  flex-direction: column;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+
+  &_brand {
+    margin-left: auto;
+    padding: 1rem 2rem;
+    border: 1px solid #999;
+    text-decoration: none;
+    color: #fff;
+    background-color: #f390a1;
+    border-radius: 1rem;
+    transition: all 0.5s;
+
+    &:hover {
+      border-radius: 2rem;
+      cursor: pointer;
+    }
+  }
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 0.7fr 1fr;
+  flex: 1;
+  align-items: flex-end;
+
+  &-text {
+    font-size: 6rem;
+    line-height: 1;
+
+    &_small {
+      font-size: 2rem;
+      letter-spacing: 1px;
+    }
+  }
+  &_left {
+    display: flex;
+    padding: 2rem;
+    flex-direction: column;
+    justify-content: flex-end; /* Align content of main_left to the bottom */
+    height: 100%;
+    margin-bottom: 10%;
+  }
+  &_right {
+    grid-column: 2/-1;
+
+    height: 100%;
+    width: 100%;
+  }
+
+  &_img {
+    object-fit: contain;
+    height: 30rem;
+    width: 30rem;
+
+    &-left {
+      position: relative;
+      top: 35%;
+      left: -3%;
+    }
+    &-right {
+      position: relative;
+    }
+  }
+
+  &_btn {
+    padding: 1rem 2rem;
+    display: block;
+    background-color: #f390a1;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 1rem;
+    transition: all 0.5s;
+
+    &:hover {
+      border-radius: 2rem;
+      box-shadow: 0 5px 15px -3px rgba(0, 0, 0, 0.2),
+        0 4px 6px -2px rgba(0, 0, 0, 0.1),
+        0 0 30px 10px rgba(255, 255, 255, 0.6);
+    }
+  }
+}
+.button {
+  padding: 0;
+}
+.dot {
+  background-color: #e79d12;
+  box-shadow: 0 0 40px #fda501d8;
+  height: 3rem;
+  width: 3rem;
+  position: relative;
+  top: -30%;
+  left: 50%;
+  border-radius: 50%;
+}
+.dot2 {
+  background-color: #b7088eb3;
+  box-shadow: 0 0 40px rgb(122, 1, 118);
+  height: 3rem;
+  width: 3rem;
+  position: relative;
+  top: -6%;
+  left: 30%;
+  border-radius: 50%;
+}
