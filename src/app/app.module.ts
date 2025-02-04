@@ -9,9 +9,10 @@ import { LoginComponent } from './login/login.component';
 import { HomePageComponent } from './homepage/homepage.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainPageComponent } from './main-page/main-page.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, HomePageComponent, MainPageComponent],
+  declarations: [AppComponent, LoginComponent, HomePageComponent, MainPageComponent, SignupComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [AuthService, UserService],
   bootstrap: [AppComponent],

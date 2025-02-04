@@ -31,7 +31,32 @@
       </div>
     </div>
   </div>
-  <div class="main_header">Header</div>
+  <div class="main_header">
+    <p class="main_header-greet">Hello, user</p>
+    <div class="main_header-right">
+      <button class="main_header-plus">Add expenses</button>
+
+      <div class="dropdown" [class.open]="isOpen">
+        <button
+          class="dropdown-toggle dropdown_btn"
+          type="button"
+          (click)="onOpen()"
+          data-toggle="dropdown"
+        >
+          <img
+            src="../../assets/img/user.png"
+            alt="User image"
+            class="dropdown_user"
+          />
+
+          <span class="caret dropdown_caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a href="#">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
   <div class="main_content">Content</div>
 
   <div class="main_details">Details</div>

@@ -3,20 +3,21 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class SignupComponent implements OnInit {
   myForm!: FormGroup;
   ngOnInit(): void {
     this.myForm = new FormGroup({
+      fname: new FormControl('', [Validators.required]),
+      lname: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required]),
     });
   }
   onSubmit() {
-    console.log(this.myForm);
     this.router.navigate(['/main']);
   }
 

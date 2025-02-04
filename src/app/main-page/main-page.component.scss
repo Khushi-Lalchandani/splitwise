@@ -75,10 +75,32 @@
   &_header {
     grid-column: 2/3;
     width: 100%;
-    background-color: purple;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 2rem;
 
     grid-row: 1/2;
+
+    &-greet {
+      font-size: 2.4rem;
+    }
+
+    &-right {
+      display: flex;
+      align-items: center;
+    }
+    &-plus {
+      text-wrap: nowrap;
+      padding: 1rem;
+      background-color: rgb(232, 26, 26);
+      border-radius: 1.6rem;
+      outline: none;
+      border: none;
+
+      font-size: 1.3rem;
+      margin-right: 10%;
+    }
   }
   &_details {
     grid-column: 3/4;
@@ -97,5 +119,27 @@
     padding: 2rem;
 
     grid-row: 2/3;
+  }
+}
+
+.dropdown {
+  &_btn {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    gap: 0.4rem;
+  }
+
+  &_user {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+  }
+
+  &_caret {
+    height: 0.8rem;
+    margin: 0.3rem 0 0 0;
+    width: 0.8rem;
   }
 }

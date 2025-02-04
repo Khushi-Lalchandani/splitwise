@@ -5,4 +5,9 @@ import { Component } from '@angular/core';
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.scss'],
 })
-export class MainPageComponent {}
+export class MainPageComponent {
+  isOpen: boolean = false;
+  onOpen() {
+    this.isOpen = !this.isOpen;
+  }
+}
