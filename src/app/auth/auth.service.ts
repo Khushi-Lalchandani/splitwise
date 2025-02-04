@@ -1,5 +1,7 @@
+import { user } from './../user/user.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthService {
@@ -7,13 +9,18 @@ export class AuthService {
     email: string;
     password: string;
     returnSecureToken: boolean;
-  }) {
-    return this.https.post(
+  }): Observable<any> {
+    return this.http.post(
       'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAZ7Wox-x5tyqRiNvD2YrVtoP69eDjZFPs',
       details
     );
   }
-  signUpFirebase() {}
+  signUpFirebase(content: user): Observable<any> {
+    return this.http.post(
+      'https://splitbills-3abe9-default-rtdb.firebaseio.com/.json',
+      content
+    );
+  }
   login() {}
-  constructor(private https: HttpClient) {}
+  constructor(private http: HttpClient) {}
 }

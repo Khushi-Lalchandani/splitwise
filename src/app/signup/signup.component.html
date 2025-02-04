@@ -66,6 +66,8 @@
     >
       Enter valid password
     </div>
+    <p class="help-group" *ngIf="error">{{ error }}</p>
+
     <div class="submit">
       <button class="submit_button" type="submit" [disabled]="!myForm.valid">
         Submit
