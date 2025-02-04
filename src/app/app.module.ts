@@ -10,10 +10,23 @@ import { HomePageComponent } from './homepage/homepage.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainPageComponent } from './main-page/main-page.component';
 import { SignupComponent } from './signup/signup.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, HomePageComponent, MainPageComponent, SignupComponent],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    HomePageComponent,
+    MainPageComponent,
+    SignupComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+  ],
   providers: [AuthService, UserService],
   bootstrap: [AppComponent],
 })

@@ -1,11 +1,29 @@
 .form {
   width: 50%;
-  padding: 4rem 0;
-  margin: 0 auto;
+  padding: 4rem;
+  margin: 5% auto;
+  border: 1px solid #000;
+  border-radius: 20px;
 }
-.btn {
-  margin-right: 2rem;
-}
+
 .help-group {
   color: red;
+}
+.submit {
+  display: flex;
+  // justify-content: center;
+  &_button {
+    padding: 1rem 3rem;
+    border-radius: 12px;
+    background-color: #ddd;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+.redirect {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

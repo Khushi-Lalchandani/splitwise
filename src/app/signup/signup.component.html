@@ -66,8 +66,16 @@
     >
       Enter valid password
     </div>
-    <button class="btn btn-primary" type="submit" [disabled]="!myForm.valid">
-      Submit
-    </button>
+    <div class="submit">
+      <button class="submit_button" type="submit" [disabled]="!myForm.valid">
+        Submit
+      </button>
+    </div>
+    <hr />
+    <div class="redirect">
+      <p>
+        Already have an account? &nbsp;<a [routerLink]="'/login'">Sign In</a>
+      </p>
+    </div>
   </form>
 </div>
