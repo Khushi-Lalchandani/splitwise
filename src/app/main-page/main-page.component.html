@@ -32,7 +32,9 @@
     </div>
   </div>
   <div class="main_header">
-    <p class="main_header-greet">Hello, user</p>
+    <p class="main_header-greet" *ngIf="currentUserDetails">
+      Hello, {{ currentUserDetails.name }}!!
+    </p>
     <div class="main_header-right">
       <button class="main_header-plus">Add expenses</button>
 
@@ -52,7 +54,7 @@
           <span class="caret dropdown_caret"></span>
         </button>
         <ul class="dropdown-menu">
-          <li><a [routerLink]="'/login'">Logout</a></li>
+          <li><a (click)="logout()">Logout</a></li>
         </ul>
       </div>
     </div>

@@ -46,7 +46,12 @@ export class SignupComponent implements OnInit {
             this.authService.signUpFirebase(newUser).subscribe({
               next: () => {
                 console.log('User added to firebase database');
-                this.router.navigate(['/main']);
+                this.authService.authenticateUser(
+                  'true',
+                  this.myForm.value.email
+                );
+                const username = this.myForm.value.email.split('@')[0];
+                this.router.navigate([`/main/${username}`]);
               },
               error: (err) => {
                 console.log('Error posting user to Firebase Database', err);
