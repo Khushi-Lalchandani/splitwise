@@ -22,18 +22,29 @@
       </div>
 
       <div class="main_sidebar-dash">
+        <div class="main_sidebar-dash--flex">
+          <img
+            src="../../assets/img/down_arrow.png"
+            alt="Down arrow"
+            class="main_sidebar-down"
+          />
+          <p>Friends</p>
+        </div>
+
         <img
           src="../../assets/img/plus.png"
           alt="Add icon"
           class="main_sidebar-plus"
         />
-        <p>Add friends</p>
       </div>
     </div>
   </div>
   <div class="main_header">
-    <p class="main_header-greet" *ngIf="currentUserDetails">
-      Hello, {{ currentUserDetails.name }}!!
+    <p
+      class="main_header-greet"
+      *ngIf="currentUserDetails && currentUserDetails[0]"
+    >
+      Hello, {{ currentUserDetails[0].name }}!!
     </p>
     <div class="main_header-right">
       <button class="main_header-plus">Add expenses</button>

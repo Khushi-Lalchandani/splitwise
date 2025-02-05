@@ -45,7 +45,7 @@ export class AuthService {
 
   getDetails() {
     return this.http.get(
-      'https://splitbills-3abe9-default-rtdb.firebaseio.com/.json'
+      'https://splitbills-3abe9-default-rtdb.firebaseio.com/users.json'
     );
   }
   constructor(private http: HttpClient, private router: Router) {}

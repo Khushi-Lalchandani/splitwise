@@ -20,9 +20,14 @@
       height: 1.4rem;
       width: 1.4rem;
     }
-    &-plus {
+    &-plus,
+    &-down {
       height: 1.2rem;
       width: 1.2rem;
+    }
+
+    &-plus {
+      margin-left: auto;
     }
 
     &-dash {
@@ -32,7 +37,6 @@
       gap: 0.5rem;
       width: 100%;
       transition: background-position 0.4s cubic-bezier(0, 0.08, 1, 0.03);
-
       border-radius: 20px;
 
       &:hover {
@@ -41,6 +45,12 @@
         background-size: 150% 150%;
 
         cursor: pointer;
+      }
+
+      &--flex {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
       }
     }
     &-heading {
@@ -142,4 +152,9 @@
     margin: 0.3rem 0 0 0;
     width: 0.8rem;
   }
+}
+.flex {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
