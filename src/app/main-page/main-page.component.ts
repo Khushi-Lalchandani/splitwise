@@ -12,6 +12,7 @@ export class MainPageComponent implements OnInit {
   allUserDetails: user[] = [];
   allFriends: user[] = [];
   isAuthenticated: string | null = localStorage.getItem('isAuthenticated');
+  showAllFriends: boolean = false;
   ngOnInit(): void {
     if (this.isAuthenticated) {
       this.authService.getDetails().subscribe((data: any) => {
@@ -38,6 +39,9 @@ export class MainPageComponent implements OnInit {
   isOpen: boolean = false;
   onOpen() {
     this.isOpen = !this.isOpen;
+  }
+  showFriends() {
+    this.showAllFriends = !this.showAllFriends;
   }
   logout() {
     this.authService.logout();

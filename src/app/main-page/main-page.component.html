@@ -22,11 +22,18 @@
       </div>
 
       <div class="main_sidebar-dash">
-        <div class="main_sidebar-dash--flex">
+        <div class="main_sidebar-dash--flex" (click)="showFriends()">
           <img
             src="../../assets/img/down_arrow.png"
             alt="Down arrow"
             class="main_sidebar-down"
+            *ngIf="!showAllFriends"
+          />
+          <img
+            src="../../assets/img/up_arrow.png"
+            alt="Up arrow"
+            class="main_sidebar-down"
+            *ngIf="showAllFriends"
           />
           <p>Friends</p>
         </div>
@@ -36,6 +43,14 @@
           alt="Add icon"
           class="main_sidebar-plus"
         />
+      </div>
+      <div class="main_sidebar-hidden" *ngIf="showAllFriends">
+        <div
+          class="main_sidebar-hidden--friends"
+          *ngFor="let friend of allFriends"
+        >
+          <p>{{ friend.name }}</p>
+        </div>
       </div>
     </div>
   </div>

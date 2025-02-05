@@ -53,6 +53,25 @@
         gap: 1rem;
       }
     }
+
+    &-hidden {
+      transition: top 1s cubic-bezier(0.17, 0.04, 0.03, 0.94);
+      background-color: #fff;
+      border-radius: 20px;
+      padding: 1rem 0;
+      &--friends {
+        text-align: center;
+        margin: 1rem;
+        background-color: red;
+        border-bottom: 1px solid #000;
+        // border-radius: 20px;
+        font-size: 1.3rem;
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
     &-heading {
       text-align: center;
       font-size: 2.4rem;
@@ -76,6 +95,10 @@
       font-size: 1.4rem;
       overflow-y: scroll;
       height: 100%;
+
+      &:last-child {
+        gap: 0;
+      }
 
       &::-webkit-scrollbar {
         display: none;
