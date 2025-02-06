@@ -11,6 +11,7 @@ export class MainPageComponent implements OnInit {
   currentUserDetails: user | any = [];
   allUserDetails: user[] = [];
   allFriends: user[] = [];
+  showAdd: boolean = false;
   isAuthenticated: string | null = localStorage.getItem('isAuthenticated');
   showAllFriends: boolean = false;
   ngOnInit(): void {
@@ -45,6 +46,9 @@ export class MainPageComponent implements OnInit {
   }
   logout() {
     this.authService.logout();
+  }
+  showAddPopup() {
+    this.showAdd = true;
   }
   constructor(private authService: AuthService) {}
 }

@@ -1,0 +1,71 @@
+<div class="add">
+  <form [formGroup]="detailsForm" class="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="fname">First name:</label>
+      <input
+        type="fname"
+        class="form-control"
+        formControlName="fname"
+        id="fname"
+        placeholder="Enter your friend's first name"
+      />
+    </div>
+    <div
+      class="help-group"
+      *ngIf="
+        detailsForm.get('fname')?.touched && !detailsForm.get('fname')?.valid
+      "
+    >
+      Enter valid fname
+    </div>
+
+    <div class="form-group">
+      <label for="lname">Last name:</label>
+      <input
+        type="lname"
+        class="form-control"
+        formControlName="lname"
+        id="lname"
+        placeholder="Enter your friend's last name"
+      />
+    </div>
+    <div
+      class="help-group"
+      *ngIf="
+        detailsForm.get('lname')?.touched && !detailsForm.get('lname')?.valid
+      "
+    >
+      Enter valid lname
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input
+        type="email"
+        class="form-control"
+        formControlName="email"
+        id="email"
+        placeholder="Enter your friend's email"
+      />
+    </div>
+    <div
+      class="help-group"
+      *ngIf="
+        !detailsForm.get('email')?.valid && detailsForm.get('email')?.touched
+      "
+    >
+      Enter valid email
+    </div>
+
+    <div class="button">
+      <button
+        class="button_submit"
+        type="submit"
+        [disabled]="!detailsForm.valid"
+      >
+        Submit
+      </button>
+      <button class="button_cancel" (click)="onCancel()">Cancel</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,43 @@
+.add {
+  position: absolute;
+  top: 15%;
+  left: 30%;
+  border-radius: 20px;
+  height: auto;
+  padding: 2rem;
+  width: 50rem;
+  background-color: #fff;
+}
+.button {
+  &_submit,
+  &_cancel {
+    padding: 1rem 2rem;
+    margin-right: 1rem;
+    border-radius: 1.2rem;
+    border: none;
+    color: #fff;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  &_submit {
+    background-color: #11c211;
+
+    &:hover {
+      background-color: #118611;
+      box-shadow: 0 10px 16px rgba(#118611, 0.1);
+    }
+  }
+  &_cancel {
+    background-color: #ad0707;
+
+    &:hover {
+      background-color: #e33c3c;
+      box-shadow: 0 10px 16px rgba(#ad0707, 0.1);
+    }
+  }
+}
+.help-group {
+  color: red;
+}

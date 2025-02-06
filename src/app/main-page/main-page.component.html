@@ -1,4 +1,4 @@
-<section class="main">
+<section class="main" [ngClass]="{ blur: showAdd }">
   <div class="main_sidebar">
     <div class="main_sidebar-heading">
       <a href="#">SplitBills</a>
@@ -42,6 +42,7 @@
           src="../../assets/img/plus.png"
           alt="Add icon"
           class="main_sidebar-plus"
+          (click)="showAddPopup()"
         />
       </div>
       <div class="main_sidebar-hidden" *ngIf="showAllFriends">
@@ -89,3 +90,4 @@
 
   <div class="main_details">Details</div>
 </section>
+<app-add-popup *ngIf="showAdd" (hide)="showAdd = $event"></app-add-popup>

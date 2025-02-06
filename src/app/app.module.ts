@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainPageComponent } from './main-page/main-page.component';
 import { SignupComponent } from './signup/signup.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AddPopupComponent } from './add-popup/add-popup.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     HomePageComponent,
     MainPageComponent,
     SignupComponent,
+    AddPopupComponent,
   ],
   imports: [
     BrowserModule,
