@@ -21,7 +21,7 @@ export class MainPageComponent implements OnInit {
         keys.forEach((key) => {
           this.allUserDetails.push(data[key]);
         });
-        console.log(this.allUserDetails);
+        // console.log(this.allUserDetails);
 
         const email = localStorage.getItem('currentUser');
 
@@ -29,11 +29,9 @@ export class MainPageComponent implements OnInit {
           (detail) => detail.email === email
         );
         console.log(this.currentUserDetails);
-
-        this.allFriends = this.allUserDetails.filter(
-          (details) => details.email !== email
-        );
-        console.log(this.allFriends);
+        // this.currentUserDetails[0].friends
+        //   ? console.log(this.currentUserDetails[0].friends)
+        //   : (this.currentUserDetails[0].friends = []);
       });
     }
   }

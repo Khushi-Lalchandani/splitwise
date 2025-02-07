@@ -7,8 +7,9 @@ export interface expenses {
 export interface user {
   name: string;
   email: string;
+  friends: string[];
   expenses: expenses[];
-  equallySplitted?: boolean;
-  unequallySplitted?: boolean;
+  equallySplitted: boolean;
+  unequallySplitted: boolean;
   percentageOfSplitting: number[];
 }

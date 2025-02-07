@@ -22,7 +22,7 @@ export class SignupComponent implements OnInit {
   }
   onSubmit() {
     if (this.myForm.valid) {
-      const { fname, lname, email, password } = this.myForm.value;
+      const { fname, lname, email } = this.myForm.value;
       console.log(this.myForm);
       this.authService
         .signUp({
@@ -37,11 +37,20 @@ export class SignupComponent implements OnInit {
             const newUser: user = {
               name: `${fname} ${lname}`,
               email: email,
-              expenses: [],
+              expenses: [
+                {
+                  category: '',
+                  splitWith: [''],
+                  amountToBePaid: 0,
+                  amountToBeReceived: 0,
+                },
+              ],
               equallySplitted: false,
               unequallySplitted: false,
-              percentageOfSplitting: [],
+              percentageOfSplitting: [0],
+              friends: [''],
             };
+            // console.log(newUser);
 
             this.authService.signUpFirebase(newUser).subscribe({
               next: () => {

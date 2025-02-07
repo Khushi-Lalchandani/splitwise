@@ -48,7 +48,7 @@
       <div class="main_sidebar-hidden" *ngIf="showAllFriends">
         <div
           class="main_sidebar-hidden--friends"
-          *ngFor="let friend of allFriends"
+          *ngFor="let friend of currentUserDetails.friends"
         >
           <p>{{ friend.name }}</p>
         </div>
