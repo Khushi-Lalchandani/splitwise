@@ -48,12 +48,12 @@ export class AuthService {
       'https://splitbills-3abe9-default-rtdb.firebaseio.com/users.json'
     );
   }
-
-  postData(details: user) {
-    return this.http.post(
-      'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAZ7Wox-x5tyqRiNvD2YrVtoP69eDjZFPs',
-      details
+  updateData(data: user) {
+    return this.http.put(
+      'https://splitbills-3abe9-default-rtdb.firebaseio.com/users.json',
+      data
     );
   }
+
   constructor(private http: HttpClient, private router: Router) {}
 }

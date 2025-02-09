@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth/auth.service';
 
@@ -9,18 +9,19 @@ import { AuthService } from '../auth/auth.service';
 })
 export class AddPopupComponent implements OnInit {
   detailsForm!: FormGroup;
+  @Input() options!: any[];
+  @Output() friendSelected = new EventEmitter<string>();
   @Output() hide = new EventEmitter<boolean>();
   ngOnInit(): void {
     this.detailsForm = new FormGroup({
-      fname: new FormControl('', Validators.required),
-      lname: new FormControl('', Validators.required),
-      email: new FormControl('', [Validators.required, Validators.email]),
+      selectedOption: new FormControl('', Validators.required),
     });
   }
   onSubmit() {
     if (this.detailsForm.valid) {
-      console.log(this.detailsForm.value);
-      const value = this.detailsForm.value;
+      const value = this.detailsForm.value.selectedOption;
+      this.friendSelected.emit(value);
+      this.hide.emit(false);
     }
   }
   onCancel() {

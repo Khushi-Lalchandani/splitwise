@@ -90,4 +90,9 @@
 
   <div class="main_details">Details</div>
 </section>
-<app-add-popup *ngIf="showAdd" (hide)="showAdd = $event"></app-add-popup>
+<app-add-popup
+  *ngIf="showAdd && allFriends"
+  (hide)="showAdd = $event"
+  [options]="allFriends"
+  (friendSelected)="onFriendSelected($event)"
+></app-add-popup>

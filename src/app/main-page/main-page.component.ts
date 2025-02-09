@@ -16,32 +16,42 @@ export class MainPageComponent implements OnInit {
   showAllFriends: boolean = false;
   ngOnInit(): void {
     if (this.isAuthenticated) {
-      this.authService.getDetails().subscribe((data: any) => {
-        const keys = Object.keys(data);
-        keys.forEach((key) => {
-          this.allUserDetails.push(data[key]);
-        });
-        // console.log(this.allUserDetails);
-
-        const email = localStorage.getItem('currentUser');
-
-        this.currentUserDetails = this.allUserDetails.filter(
-          (detail) => detail.email === email
-        );
-        console.log(this.currentUserDetails);
-        // this.currentUserDetails[0].friends
-        //   ? console.log(this.currentUserDetails[0].friends)
-        //   : (this.currentUserDetails[0].friends = []);
-      });
+      this.fetchUserDetails();
     }
+  }
+
+  fetchUserDetails() {
+    this.authService.getDetails().subscribe((data: any) => {
+      const keys = Object.keys(data);
+      keys.forEach((key) => {
+        this.allUserDetails.push(data[key]);
+      });
+      // console.log(this.allUserDetails);
+
+      const email = localStorage.getItem('currentUser');
+
+      this.currentUserDetails = this.allUserDetails.filter(
+        (detail) => detail.email === email
+      );
+      console.log(this.currentUserDetails);
+
+      this.allFriends = this.allUserDetails.filter(
+        (detail) => detail.email !== email
+      );
+    });
   }
   isOpen: boolean = false;
   onOpen() {
     this.isOpen = !this.isOpen;
   }
+  onFriendSelected($event: string) {
+    console.log($event);
+    console.log(this.allUserDetails);
+  }
   showFriends() {
     this.showAllFriends = !this.showAllFriends;
   }
+
   logout() {
     this.authService.logout();
   }
