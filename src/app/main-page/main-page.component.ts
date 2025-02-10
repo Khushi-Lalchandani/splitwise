@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { user } from '../user/user.model';
 
@@ -13,8 +14,13 @@ export class MainPageComponent implements OnInit {
   allFriends: user[] = [];
   showAdd: boolean = false;
   isAuthenticated: string | null = localStorage.getItem('isAuthenticated');
+  dataUpdated = new BehaviorSubject<boolean>(false);
   showAllFriends: boolean = false;
   ngOnInit(): void {
+    if (this.dataUpdated.value) {
+      this.fetchUserDetails();
+    }
+
     if (this.isAuthenticated) {
       this.fetchUserDetails();
     }
@@ -45,8 +51,29 @@ export class MainPageComponent implements OnInit {
     this.isOpen = !this.isOpen;
   }
   onFriendSelected($event: string) {
-    console.log($event);
-    console.log(this.allUserDetails);
+    // console.log($event);
+    // console.log(this.allUserDetails);
+
+    if (this.allUserDetails && this.allUserDetails.length > 0) {
+      const theirFriend = this.allUserDetails.filter(
+        (detail) => detail.email === $event
+      );
+      this.allUserDetails.forEach((data) => {
+        if (data.email === this.currentUserDetails[0].email) {
+          console.log(localStorage.getItem('currentUser'));
+
+          if (data.friends && data.friends.length > 0) {
+            data.friends = data.friends.filter((friend) => friend !== '');
+            console.log(data.friends);
+            // data.friends.push(theirFriend);
+          }
+        }
+      });
+      this.authService
+        .updateData(this.allUserDetails)
+        .subscribe(() => this.dataUpdated.next(true));
+      console.log(this.allUserDetails);
+    }
   }
   showFriends() {
     this.showAllFriends = !this.showAllFriends;

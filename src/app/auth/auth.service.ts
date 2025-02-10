@@ -48,7 +48,7 @@ export class AuthService {
       'https://splitbills-3abe9-default-rtdb.firebaseio.com/users.json'
     );
   }
-  updateData(data: user) {
+  updateData(data: user[]) {
     return this.http.put(
       'https://splitbills-3abe9-default-rtdb.firebaseio.com/users.json',
       data

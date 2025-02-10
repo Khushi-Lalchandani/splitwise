@@ -7,7 +7,7 @@ export interface expenses {
 export interface user {
   name: string;
   email: string;
-  friends: string[];
+  friends: any[];
   expenses: expenses[];
   equallySplitted: boolean;
   unequallySplitted: boolean;
