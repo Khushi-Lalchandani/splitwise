@@ -48,9 +48,10 @@
       <div class="main_sidebar-hidden" *ngIf="showAllFriends">
         <div
           class="main_sidebar-hidden--friends"
-          *ngFor="let friend of currentUserDetails.friends"
+          *ngFor="let friend of currentUserDetails[0].friends"
         >
-          <p>{{ friend.name }}</p>
+          <p>{{ friend?.name }}</p>
+          <img src="../../assets/img/bin.png" alt="Delete icon" />
         </div>
       </div>
     </div>

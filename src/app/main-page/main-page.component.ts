@@ -17,13 +17,14 @@ export class MainPageComponent implements OnInit {
   dataUpdated = new BehaviorSubject<boolean>(false);
   showAllFriends: boolean = false;
   ngOnInit(): void {
-    if (this.dataUpdated.value) {
-      this.fetchUserDetails();
-    }
-
     if (this.isAuthenticated) {
       this.fetchUserDetails();
     }
+    this.dataUpdated.subscribe((value) => {
+      if (value) {
+        this.fetchUserDetails();
+      }
+    });
   }
 
   fetchUserDetails() {
@@ -45,34 +46,43 @@ export class MainPageComponent implements OnInit {
         (detail) => detail.email !== email
       );
     });
+
+    console.log(this.currentUserDetails);
   }
   isOpen: boolean = false;
   onOpen() {
     this.isOpen = !this.isOpen;
   }
   onFriendSelected($event: string) {
-    // console.log($event);
-    // console.log(this.allUserDetails);
-
     if (this.allUserDetails && this.allUserDetails.length > 0) {
       const theirFriend = this.allUserDetails.filter(
         (detail) => detail.email === $event
       );
-      this.allUserDetails.forEach((data) => {
-        if (data.email === this.currentUserDetails[0].email) {
-          console.log(localStorage.getItem('currentUser'));
-
-          if (data.friends && data.friends.length > 0) {
+      if (theirFriend) {
+        this.allUserDetails.forEach((data) => {
+          if (data.email === this.currentUserDetails[0].email) {
+            if (!data.friends) {
+              data.friends = [];
+            }
             data.friends = data.friends.filter((friend) => friend !== '');
-            console.log(data.friends);
-            // data.friends.push(theirFriend);
+            if ((data.friends = [])) {
+              data.friends.push(...theirFriend);
+            }
+            if (data.friends.length > 0) {
+              data.friends.forEach((friend) => {
+                if (friend.email !== theirFriend[0].email) {
+                  data.friends.push(...theirFriend);
+                } else {
+                  console.log('Friend already exists');
+                }
+              });
+            }
           }
-        }
-      });
-      this.authService
-        .updateData(this.allUserDetails)
-        .subscribe(() => this.dataUpdated.next(true));
-      console.log(this.allUserDetails);
+        });
+        this.authService
+          .updateData(this.allUserDetails)
+          .subscribe(() => this.dataUpdated.next(true));
+      }
     }
   }
   showFriends() {
