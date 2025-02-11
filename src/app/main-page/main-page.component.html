@@ -1,4 +1,4 @@
-<section class="main" [ngClass]="{ blur: showAdd }">
+<section class="main" [ngClass]="{ blur: showAdd || showDelete }">
   <div class="main_sidebar">
     <div class="main_sidebar-heading">
       <a href="#">SplitBills</a>
@@ -42,7 +42,7 @@
           src="../../assets/img/plus.png"
           alt="Add icon"
           class="main_sidebar-plus"
-          (click)="showAddPopup()"
+          (click)="showAdd = true"
         />
       </div>
       <div class="main_sidebar-hidden" *ngIf="showAllFriends">
@@ -51,7 +51,12 @@
           *ngFor="let friend of currentUserDetails[0].friends"
         >
           <p>{{ friend?.name }}</p>
-          <img src="../../assets/img/bin.png" alt="Delete icon" />
+          <img
+            src="../../assets/img/bin.png"
+            alt="Delete icon"
+            class="delete_icon"
+            (click)="showDelete = true"
+          />
         </div>
       </div>
     </div>
@@ -97,3 +102,7 @@
   [options]="allFriends"
   (friendSelected)="onFriendSelected($event)"
 ></app-add-popup>
+<app-delete-popup
+  *ngIf="showDelete"
+  (showModal)="showDelete = $event"
+></app-delete-popup>

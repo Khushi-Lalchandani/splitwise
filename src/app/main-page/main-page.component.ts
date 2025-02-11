@@ -13,6 +13,7 @@ export class MainPageComponent implements OnInit {
   allUserDetails: user[] = [];
   allFriends: user[] = [];
   showAdd: boolean = false;
+  showDelete: boolean = false;
   isAuthenticated: string | null = localStorage.getItem('isAuthenticated');
   dataUpdated = new BehaviorSubject<boolean>(false);
   showAllFriends: boolean = false;
@@ -33,15 +34,12 @@ export class MainPageComponent implements OnInit {
       keys.forEach((key) => {
         this.allUserDetails.push(data[key]);
       });
-      // console.log(this.allUserDetails);
-
       const email = localStorage.getItem('currentUser');
 
       this.currentUserDetails = this.allUserDetails.filter(
         (detail) => detail.email === email
       );
       console.log(this.currentUserDetails);
-
       this.allFriends = this.allUserDetails.filter(
         (detail) => detail.email !== email
       );
@@ -49,6 +47,7 @@ export class MainPageComponent implements OnInit {
 
     console.log(this.currentUserDetails);
   }
+
   isOpen: boolean = false;
   onOpen() {
     this.isOpen = !this.isOpen;
@@ -92,8 +91,6 @@ export class MainPageComponent implements OnInit {
   logout() {
     this.authService.logout();
   }
-  showAddPopup() {
-    this.showAdd = true;
-  }
+
   constructor(private authService: AuthService) {}
 }

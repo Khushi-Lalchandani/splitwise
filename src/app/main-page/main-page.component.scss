@@ -60,11 +60,10 @@
       // border-radius: 20px;
       padding: 1rem 0;
       &--friends {
-        // text-align: center;
-        // margin: 1rem;
-        // background-color: red;
         border-bottom: 1px solid #000;
-        // border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         font-size: 1.3rem;
 
         &:last-child {
@@ -184,4 +183,8 @@
 
 .blur {
   filter: blur(10px);
+}
+.delete_icon {
+  height: 1.6rem;
+  width: 1.6rem;
 }
