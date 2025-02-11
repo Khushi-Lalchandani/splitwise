@@ -24,6 +24,7 @@ export class MainPageComponent implements OnInit {
     }
     this.dataUpdated.subscribe((value) => {
       if (value) {
+        window.location.reload();
         this.fetchUserDetails();
       }
     });
@@ -56,7 +57,7 @@ export class MainPageComponent implements OnInit {
         (detail) => detail.email === $event
       );
       if (theirFriend) {
-        this.allUserDetails.forEach((data) => {
+        this.allUserDetails.map((data) => {
           if (data.email === this.currentUserDetails[0].email) {
             if (!data.friends || data.friends.length === 0) {
               data.friends = [...theirFriend];
@@ -90,11 +91,10 @@ export class MainPageComponent implements OnInit {
       this.allUserDetails.length > 0 &&
       this.currentUserDetails.length > 0
     ) {
-      this.allUserDetails.forEach((person) => {
+      this.allUserDetails.map((person) => {
         if (person.email === this.currentUserDetails[0].email) {
           person.friends.some((friend) => {
             if (friend.email === this.selectedFriend.email) {
-              // how to delete?
               person.friends = person.friends.filter(
                 (friend) => friend.email !== this.selectedFriend.email
               );
