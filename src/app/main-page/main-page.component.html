@@ -55,7 +55,7 @@
             src="../../assets/img/bin.png"
             alt="Delete icon"
             class="delete_icon"
-            (click)="showDelete = true"
+            (click)="deleteFriend(friend)"
           />
         </div>
       </div>
@@ -105,4 +105,5 @@
 <app-delete-popup
   *ngIf="showDelete"
   (showModal)="showDelete = $event"
+  (confirmDelete)="onConfirmDelete($event)"
 ></app-delete-popup>

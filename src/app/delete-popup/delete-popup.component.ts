@@ -7,7 +7,12 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class DeletePopupComponent {
   @Output() showModal = new EventEmitter<boolean>();
+  @Output() confirmDelete = new EventEmitter<boolean>();
 
+  confirm() {
+    this.confirmDelete.emit(true);
+    this.closeModal();
+  }
   closeModal() {
     this.showModal.emit(false);
   }

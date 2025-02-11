@@ -11,6 +11,7 @@ import { user } from '../user/user.model';
 export class MainPageComponent implements OnInit {
   currentUserDetails: user | any = [];
   allUserDetails: user[] = [];
+  selectedFriend!: user;
   allFriends: user[] = [];
   showAdd: boolean = false;
   showDelete: boolean = false;
@@ -39,13 +40,10 @@ export class MainPageComponent implements OnInit {
       this.currentUserDetails = this.allUserDetails.filter(
         (detail) => detail.email === email
       );
-      console.log(this.currentUserDetails);
       this.allFriends = this.allUserDetails.filter(
         (detail) => detail.email !== email
       );
     });
-
-    console.log(this.currentUserDetails);
   }
 
   isOpen: boolean = false;
@@ -60,21 +58,17 @@ export class MainPageComponent implements OnInit {
       if (theirFriend) {
         this.allUserDetails.forEach((data) => {
           if (data.email === this.currentUserDetails[0].email) {
-            if (!data.friends) {
-              data.friends = [];
+            if (!data.friends || data.friends.length === 0) {
+              data.friends = [...theirFriend];
             }
-            data.friends = data.friends.filter((friend) => friend !== '');
-            if ((data.friends = [])) {
-              data.friends.push(...theirFriend);
-            }
+
             if (data.friends.length > 0) {
-              data.friends.forEach((friend) => {
-                if (friend.email !== theirFriend[0].email) {
-                  data.friends.push(...theirFriend);
-                } else {
-                  console.log('Friend already exists');
-                }
-              });
+              data.friends = data.friends.filter((friend) => friend !== '');
+              data.friends.some((friend) =>
+                friend.email !== theirFriend[0].email
+                  ? data.friends.push(...theirFriend)
+                  : ''
+              );
             }
           }
         });
@@ -82,6 +76,35 @@ export class MainPageComponent implements OnInit {
           .updateData(this.allUserDetails)
           .subscribe(() => this.dataUpdated.next(true));
       }
+    }
+  }
+
+  deleteFriend(friend: user) {
+    this.selectedFriend = friend;
+    this.showDelete = true;
+  }
+  onConfirmDelete($event: boolean) {
+    if (
+      $event &&
+      this.selectedFriend &&
+      this.allUserDetails.length > 0 &&
+      this.currentUserDetails.length > 0
+    ) {
+      this.allUserDetails.forEach((person) => {
+        if (person.email === this.currentUserDetails[0].email) {
+          person.friends.some((friend) => {
+            if (friend.email === this.selectedFriend.email) {
+              // how to delete?
+              person.friends = person.friends.filter(
+                (friend) => friend.email !== this.selectedFriend.email
+              );
+            }
+          });
+        }
+      });
+      this.authService
+        .updateData(this.allUserDetails)
+        .subscribe(() => this.dataUpdated.next(true));
     }
   }
   showFriends() {
