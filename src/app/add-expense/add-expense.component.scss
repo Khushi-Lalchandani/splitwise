@@ -8,7 +8,8 @@
   padding: 2rem;
   border-radius: 20px;
 
-  input {
+  input,
+  select {
     border-radius: 12px;
     outline: none;
     padding: 1rem;
@@ -18,6 +19,9 @@
     &:focus {
       border: 1.4px solid #000;
     }
+  }
+  select {
+    padding: 0;
   }
 }
 .button {

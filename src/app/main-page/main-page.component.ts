@@ -120,6 +120,18 @@ export class MainPageComponent implements OnInit {
 
   onGettingDetails($event: any) {
     console.log($event);
+
+    if (
+      this.allUserDetails &&
+      this.allUserDetails.length > 0 &&
+      this.currentUserDetails.length > 0
+    ) {
+      this.allUserDetails.filter((person) => {
+        if (person.email === this.currentUserDetails[0].email) {
+          // person.expenses.push({category:$event.description,splitWith})
+        }
+      });
+    }
   }
 
   constructor(private authService: AuthService) {}

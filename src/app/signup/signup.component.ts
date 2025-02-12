@@ -43,11 +43,11 @@ export class SignupComponent implements OnInit {
                   splitWith: [''],
                   amountToBePaid: 0,
                   amountToBeReceived: 0,
+                  equallySplitted: false,
+                  unequallySplitted: false,
+                  percentageOfSplitting: [0],
                 },
               ],
-              equallySplitted: false,
-              unequallySplitted: false,
-              percentageOfSplitting: [0],
               friends: [''],
             };
             // console.log(newUser);

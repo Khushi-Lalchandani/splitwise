@@ -1,5 +1,11 @@
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  FormArray,
+  FormControlName,
+} from '@angular/forms';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'app-add-expense',
@@ -8,11 +14,13 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class AddExpenseComponent implements OnInit {
   billDetails!: FormGroup;
+  @Input() options: any;
   @Output() show = new EventEmitter<boolean>();
   @Output() details = new EventEmitter<[]>();
 
   ngOnInit() {
     this.billDetails = new FormGroup({
+      email: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
       amount: new FormControl('', Validators.required),
       splitBill: new FormControl(false),
@@ -35,6 +43,7 @@ export class AddExpenseComponent implements OnInit {
     });
   }
   onSubmit() {
+    console.log(this.billDetails.value);
     if (this.billDetails.valid) {
       this.details.emit(this.billDetails.value);
       this.onCancel();

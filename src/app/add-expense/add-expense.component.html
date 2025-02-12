@@ -1,6 +1,16 @@
 <div class="expense">
   <form [formGroup]="billDetails" (ngSubmit)="onSubmit()">
     <div class="form-group">
+      <label for="email">Select friend with whom you want to split bill:</label>
+
+      <select id="email" class="form-control" formControlName="email">
+        <option value="">Select an option</option>
+        <option *ngFor="let option of options" [value]="option.email">
+          {{ option.email }}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
       <label for="description">Description</label>
       <input
         type="text"

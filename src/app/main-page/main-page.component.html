@@ -118,5 +118,6 @@
 <app-add-expense
   *ngIf="showAddExpense"
   (show)="showAddExpense = $event"
+  [options]="allFriends"
   (details)="onGettingDetails($event)"
 ></app-add-expense>
