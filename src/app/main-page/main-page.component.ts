@@ -18,6 +18,8 @@ export class MainPageComponent implements OnInit {
   isAuthenticated: string | null = localStorage.getItem('isAuthenticated');
   dataUpdated = new BehaviorSubject<boolean>(false);
   showAllFriends: boolean = false;
+  showAddExpense: boolean = false;
+
   ngOnInit(): void {
     if (this.isAuthenticated) {
       this.fetchUserDetails();
@@ -41,6 +43,7 @@ export class MainPageComponent implements OnInit {
       this.currentUserDetails = this.allUserDetails.filter(
         (detail) => detail.email === email
       );
+
       this.allFriends = this.allUserDetails.filter(
         (detail) => detail.email !== email
       );
@@ -113,6 +116,10 @@ export class MainPageComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+  }
+
+  onGettingDetails($event: any) {
+    console.log($event);
   }
 
   constructor(private authService: AuthService) {}

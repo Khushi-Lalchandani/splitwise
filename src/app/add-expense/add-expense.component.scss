@@ -1,0 +1,61 @@
+.expense {
+  position: fixed;
+  height: auto;
+  width: 40%;
+  top: 10%;
+  left: 30%;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 20px;
+
+  input {
+    border-radius: 12px;
+    outline: none;
+    padding: 1rem;
+
+    border: 1.4px solid #ddd;
+
+    &:focus {
+      border: 1.4px solid #000;
+    }
+  }
+}
+.button {
+  width: 100%;
+  text-align: center;
+  padding: 0.8rem 0;
+  border-radius: 12px;
+  outline: none;
+  border: none;
+  margin-bottom: 1rem;
+  color: #fff;
+  &_submit {
+    background-color: #df1fb2;
+
+    &:hover {
+      background-color: #b40a8c;
+    }
+  }
+  &_cancel {
+    background-color: #423f3f;
+
+    &:hover {
+      background-color: #6a6868;
+    }
+  }
+}
+.percentage {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+  &-content {
+    width: 30%;
+  }
+}
+
+.input-checkbox {
+  transform: scale(1.2);
+  margin-top: 1rem;
+  margin-left: 1rem;
+}

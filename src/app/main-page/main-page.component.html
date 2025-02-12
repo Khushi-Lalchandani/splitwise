@@ -1,4 +1,7 @@
-<section class="main" [ngClass]="{ blur: showAdd || showDelete }">
+<section
+  class="main"
+  [ngClass]="{ blur: showAdd || showDelete || showAddExpense }"
+>
   <div class="main_sidebar">
     <div class="main_sidebar-heading">
       <a href="#">SplitBills</a>
@@ -50,11 +53,14 @@
           class="main_sidebar-hidden--friends"
           *ngFor="let friend of currentUserDetails[0].friends"
         >
-          <p>{{ friend?.name }}</p>
+          <p>
+            {{ friend.name }}
+          </p>
           <img
             src="../../assets/img/bin.png"
             alt="Delete icon"
             class="delete_icon"
+            *ngIf="currentUserDetails[0].friends"
             (click)="deleteFriend(friend)"
           />
         </div>
@@ -69,7 +75,9 @@
       Hello, {{ currentUserDetails[0].name }}!!
     </p>
     <div class="main_header-right">
-      <button class="main_header-plus">Add expenses</button>
+      <button class="main_header-plus" (click)="showAddExpense = true">
+        Add expenses
+      </button>
 
       <div class="dropdown" [class.open]="isOpen">
         <button
@@ -107,3 +115,8 @@
   (showModal)="showDelete = $event"
   (confirmDelete)="onConfirmDelete($event)"
 ></app-delete-popup>
+<app-add-expense
+  *ngIf="showAddExpense"
+  (show)="showAddExpense = $event"
+  (details)="onGettingDetails($event)"
+></app-add-expense>
