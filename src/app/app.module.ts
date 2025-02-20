@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AddPopupComponent } from './add-popup/add-popup.component';
 import { DeletePopupComponent } from './delete-popup/delete-popup.component';
 import { AddExpenseComponent } from './add-expense/add-expense.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { AddExpenseComponent } from './add-expense/add-expense.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgMultiSelectDropDownModule.forRoot(),
   ],
   providers: [AuthService, UserService],
   bootstrap: [AppComponent],

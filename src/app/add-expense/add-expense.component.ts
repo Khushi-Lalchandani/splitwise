@@ -6,6 +6,7 @@ import {
   FormControlName,
 } from '@angular/forms';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { IDropdownSettings } from 'ng-multiselect-dropdown/multiselect.model';
 
 @Component({
   selector: 'app-add-expense',
@@ -13,12 +14,23 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
   styleUrls: ['./add-expense.component.scss'],
 })
 export class AddExpenseComponent implements OnInit {
+  dropDownList: any[] = [];
+  dropdownSettings: IDropdownSettings = {};
   billDetails!: FormGroup;
   @Input() options: any;
   @Output() show = new EventEmitter<boolean>();
   @Output() details = new EventEmitter<[]>();
 
   ngOnInit() {
+    this.dropDownList = [
+      { item_id: 1, item_text: 'Item1' },
+      { item_id: 2, item_text: 'Item2' },
+      { item_id: 3, item_text: 'Item3' },
+      { item_id: 4, item_text: 'Item4' },
+      { item_id: 5, item_text: 'Item5' },
+    ];
+
+    this.dropdownSettings = { idField: 'item_id', textField: 'item_text' };
     this.billDetails = new FormGroup({
       email: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),

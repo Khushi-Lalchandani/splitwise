@@ -56,3 +56,10 @@
     <button class="button button_cancel" (click)="onCancel()">Cancel</button>
   </form>
 </div>
+
+<div style="width: 50%">
+  <ng-multiselect-dropdown
+    [settings]="dropdownSettings"
+    [data]="dropDownList"
+  ></ng-multiselect-dropdown>
+</div>
