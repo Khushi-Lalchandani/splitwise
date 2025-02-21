@@ -43,17 +43,5 @@ export class AuthService {
     this.router.navigate(['/']);
   }
 
-  getDetails() {
-    return this.http.get(
-      'https://splitbills-3abe9-default-rtdb.firebaseio.com/users.json'
-    );
-  }
-  updateData(data: user[]) {
-    return this.http.put(
-      'https://splitbills-3abe9-default-rtdb.firebaseio.com/users.json',
-      data
-    );
-  }
-
   constructor(private http: HttpClient, private router: Router) {}
 }

@@ -2,13 +2,15 @@
   <form [formGroup]="billDetails" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="email">Select friend with whom you want to split bill:</label>
-
-      <select id="email" class="form-control" formControlName="email">
-        <option value="">Select an option</option>
-        <option *ngFor="let option of options" [value]="option.email">
-          {{ option.email }}
-        </option>
-      </select>
+      <div id="email">
+        <ng-multiselect-dropdown
+          formControlName="email"
+          [settings]="dropdownSettings"
+          [data]="dropDownList"
+          (onSelect)="onSelectEmail($event)"
+          (onDeSelect)="onDeSelectEmail($event)"
+        ></ng-multiselect-dropdown>
+      </div>
     </div>
     <div class="form-group">
       <label for="description">Description</label>
@@ -39,27 +41,28 @@
       />
     </div>
 
-    <div *ngIf="!billDetails.get('splitBill')?.value" class="percentage">
-      <input
-        type="number"
-        class="percentage-content"
-        formControlName="percentage1"
-      />
-      <input
-        type="number"
-        class="percentage-content"
-        formControlName="percentage2"
-      />
+    <div *ngIf="!billDetails.get('splitBill')?.value">
+      <div
+        *ngFor="
+          let percentage of billDetails.get('percentages')?.value;
+          let i = index
+        "
+      >
+        <label for="percentage{{ i }}"
+          >Percentage for {{ selectedEmails[i] }}</label
+        >
+        <input
+          type="number"
+          class="form-control"
+          id="percentage{{ i }}"
+          min="0"
+          max="100"
+          formControlName="percentages[{{ i }}]"
+        />
+      </div>
     </div>
 
     <button class="button button_submit">Submit</button>
     <button class="button button_cancel" (click)="onCancel()">Cancel</button>
   </form>
-</div>
-
-<div style="width: 50%">
-  <ng-multiselect-dropdown
-    [settings]="dropdownSettings"
-    [data]="dropDownList"
-  ></ng-multiselect-dropdown>
 </div>

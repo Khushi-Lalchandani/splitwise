@@ -1,3 +1,4 @@
+import { UserService } from './../user/user.service';
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
@@ -33,7 +34,7 @@ export class MainPageComponent implements OnInit {
   }
 
   fetchUserDetails() {
-    this.authService.getDetails().subscribe((data: any) => {
+    this.userService.getDetails().subscribe((data: any) => {
       const keys = Object.keys(data);
       keys.forEach((key) => {
         this.allUserDetails.push(data[key]);
@@ -76,7 +77,7 @@ export class MainPageComponent implements OnInit {
             }
           }
         });
-        this.authService
+        this.userService
           .updateData(this.allUserDetails)
           .subscribe(() => this.dataUpdated.next(true));
       }
@@ -105,7 +106,7 @@ export class MainPageComponent implements OnInit {
           });
         }
       });
-      this.authService
+      this.userService
         .updateData(this.allUserDetails)
         .subscribe(() => this.dataUpdated.next(true));
     }
@@ -134,5 +135,8 @@ export class MainPageComponent implements OnInit {
     }
   }
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private userService: UserService
+  ) {}
 }
