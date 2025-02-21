@@ -42,25 +42,59 @@
     </div>
 
     <div *ngIf="!billDetails.get('splitBill')?.value">
-      <div
-        *ngFor="
-          let percentage of billDetails.get('percentages')?.value;
-          let i = index
-        "
-      >
-        <label for="percentage{{ i }}"
-          >Percentage for {{ selectedEmails[i] }}</label
-        >
+      <div *ngFor="let email of billDetails.get('email')?.value; let i = index">
+        <label [for]="email">Percentage share for {{ email }}</label>
+        <!-- <input
+          type="number"
+          class="form-control"
+          [id]="email"
+          [ngModel]="'percentage' + (i + 1)"
+          [ngModelOptions]="{ standalone: true }"
+        /> -->
+
         <input
           type="number"
           class="form-control"
-          id="percentage{{ i }}"
-          min="0"
-          max="100"
-          formControlName="percentages[{{ i }}]"
+          [id]="email"
+          [(ngModel)]="percentage1"
+          *ngIf="i === 0"
+          [ngModelOptions]="{ standalone: true }"
+        />
+        <input
+          type="number"
+          class="form-control"
+          [id]="email"
+          [(ngModel)]="percentage2"
+          *ngIf="i === 1"
+          [ngModelOptions]="{ standalone: true }"
+        />
+        <input
+          type="number"
+          class="form-control"
+          [id]="email"
+          [(ngModel)]="percentage3"
+          *ngIf="i === 2"
+          [ngModelOptions]="{ standalone: true }"
+        />
+        <input
+          type="number"
+          class="form-control"
+          [id]="email"
+          [(ngModel)]="percentage4"
+          *ngIf="i === 3"
+          [ngModelOptions]="{ standalone: true }"
+        />
+        <input
+          type="number"
+          class="form-control"
+          [id]="email"
+          [(ngModel)]="percentage5"
+          *ngIf="i === 4"
+          [ngModelOptions]="{ standalone: true }"
         />
       </div>
     </div>
+    <hr />
 
     <button class="button button_submit">Submit</button>
     <button class="button button_cancel" (click)="onCancel()">Cancel</button>

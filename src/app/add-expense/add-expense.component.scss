@@ -1,12 +1,18 @@
 .expense {
   position: fixed;
-  height: auto;
+  height: 60%;
+  overflow-x: scroll;
+
   width: 40%;
   top: 10%;
   left: 30%;
   background-color: #fff;
   padding: 2rem;
   border-radius: 20px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   input,
   select {
