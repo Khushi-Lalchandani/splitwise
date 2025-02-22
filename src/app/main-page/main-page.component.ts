@@ -130,6 +130,10 @@ export class MainPageComponent implements OnInit {
       this.allUserDetails.filter((person) => {
         if (person.email === this.currentUserDetails[0].email) {
           // person.expenses.push({category:$event.description,splitWith})
+          // person.expenses = [
+          //   ...person.expenses,
+          //   { category: $event.description, },
+          // ];
         }
       });
     }

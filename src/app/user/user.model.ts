@@ -1,6 +1,5 @@
 export interface expenses {
   category: string;
-  splitWith: string[];
   amountToBePaid: number;
   amountToBeReceived: number;
   equallySplitted: boolean;

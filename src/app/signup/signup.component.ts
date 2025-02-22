@@ -40,7 +40,6 @@ export class SignupComponent implements OnInit {
               expenses: [
                 {
                   category: '',
-                  splitWith: [''],
                   amountToBePaid: 0,
                   amountToBeReceived: 0,
                   equallySplitted: false,

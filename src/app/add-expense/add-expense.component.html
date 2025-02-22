@@ -8,7 +8,6 @@
           [settings]="dropdownSettings"
           [data]="dropDownList"
           (onSelect)="onSelectEmail($event)"
-          (onDeSelect)="onDeSelectEmail($event)"
         ></ng-multiselect-dropdown>
       </div>
     </div>
@@ -44,13 +43,6 @@
     <div *ngIf="!billDetails.get('splitBill')?.value">
       <div *ngFor="let email of billDetails.get('email')?.value; let i = index">
         <label [for]="email">Percentage share for {{ email }}</label>
-        <!-- <input
-          type="number"
-          class="form-control"
-          [id]="email"
-          [ngModel]="'percentage' + (i + 1)"
-          [ngModelOptions]="{ standalone: true }"
-        /> -->
 
         <input
           type="number"

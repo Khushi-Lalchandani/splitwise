@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
         })
         .subscribe({
           next: (response) => {
-            console.log('User logged in!', response);
+            console.log('User logged in!');
             this.authService.authenticateUser('true', this.myForm.value.email);
             const username = this.myForm.value.email.split('@')[0];
             this.router.navigate([`/main/${username}`]);

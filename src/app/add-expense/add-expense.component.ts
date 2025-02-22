@@ -53,10 +53,12 @@ export class AddExpenseComponent implements OnInit {
     });
   }
   onSubmit() {
-    console.log(this.billDetails.value);
-    if (this.billDetails.valid && this.percentage.length > 0) {
-      this.billDetails.value.percentage = this.percentage;
-      console.log(this.billDetails);
+    // console.log(this.billDetails.value);
+    if (this.billDetails.valid) {
+      if (this.percentage.length > 0) {
+        this.billDetails.value.percentage = this.percentage;
+      }
+      console.log(this.billDetails.value);
       this.details.emit(this.billDetails.value);
       this.onCancel();
     }
@@ -66,14 +68,9 @@ export class AddExpenseComponent implements OnInit {
     this.show.emit(false);
   }
   onSelectEmail($event: any) {
-    console.log($event);
-
     this.selectedEmails = [...this.selectedEmails, $event];
-    // console.log(this.selectedEmails);
   }
-  onDeSelectEmail($event: any) {
-    console.log($event);
-  }
+
   addPercentage(email: string, $event: any) {
     if (this.percentage.length > 0) {
       this.percentage = [
