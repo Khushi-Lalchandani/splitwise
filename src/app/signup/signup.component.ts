@@ -40,6 +40,7 @@ export class SignupComponent implements OnInit {
               expenses: [
                 {
                   category: '',
+                  totalAmount: 0,
                   amountToBePaid: 0,
                   amountToBeReceived: 0,
                   equallySplitted: false,

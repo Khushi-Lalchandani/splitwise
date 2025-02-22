@@ -37,7 +37,7 @@ export class AddExpenseComponent implements OnInit {
     this.billDetails = new FormGroup({
       email: new FormControl([this.currentUserEmail], Validators.required),
       description: new FormControl('', Validators.required),
-      amount: new FormControl('', Validators.required),
+      amount: new FormControl(0, Validators.required),
       splitBill: new FormControl(false),
       percentage: new FormArray([]),
     });
@@ -45,7 +45,17 @@ export class AddExpenseComponent implements OnInit {
     this.billDetails.get('splitBill')?.valueChanges.subscribe((value) => {
       if (value) {
         for (let i = 0; i < this.billDetails.value.email.length; i++) {
-          this.billDetails.value.percentage.push(50);
+          const emails = this.billDetails.value.email;
+          const equalShare = (
+            100 / this.billDetails.value.email.length
+          ).toFixed(2);
+
+          this.percentage = emails.map((email: string) => ({
+            email: email,
+            perc: +equalShare,
+          }));
+
+          this.billDetails.patchValue({ percentage: this.percentage });
         }
       } else {
         this.billDetails.value.percentage = [];
@@ -53,7 +63,6 @@ export class AddExpenseComponent implements OnInit {
     });
   }
   onSubmit() {
-    // console.log(this.billDetails.value);
     if (this.billDetails.valid) {
       if (this.percentage.length > 0) {
         this.billDetails.value.percentage = this.percentage;

@@ -1,5 +1,6 @@
 export interface expenses {
   category: string;
+  totalAmount: number;
   amountToBePaid: number;
   amountToBeReceived: number;
   equallySplitted: boolean;

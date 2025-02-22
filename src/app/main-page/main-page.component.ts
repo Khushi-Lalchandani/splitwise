@@ -1,3 +1,4 @@
+import { expenses } from './../user/user.model';
 import { UserService } from './../user/user.service';
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
@@ -121,6 +122,18 @@ export class MainPageComponent implements OnInit {
 
   onGettingDetails($event: any) {
     console.log($event);
+    const paid = $event.percentage.reduce((acc: number, value: any) => {
+      if (value.email === this.currentUserDetails[0].email) {
+        acc += value.perc;
+      }
+      return acc;
+    }, 0);
+    const received = $event.percentage.reduce((acc: number, value: any) => {
+      if (value.email !== this.currentUserDetails[0].email) {
+        acc += value.perc;
+      }
+      return acc;
+    }, 0);
 
     if (
       this.allUserDetails &&
@@ -129,14 +142,27 @@ export class MainPageComponent implements OnInit {
     ) {
       this.allUserDetails.filter((person) => {
         if (person.email === this.currentUserDetails[0].email) {
-          // person.expenses.push({category:$event.description,splitWith})
-          // person.expenses = [
-          //   ...person.expenses,
-          //   { category: $event.description, },
-          // ];
+          const amountPaid = (paid * +$event.amount) / 100;
+          const amountReceived = (received * +$event.amount) / 100;
+          console.log(amountPaid, amountReceived, +$event.amount);
+          if (person.expenses.length > 0) {
+            person.expenses = [
+              ...person.expenses,
+              {
+                category: $event.description,
+                amountToBePaid: (paid / 100) * $event.amount,
+                totalAmount: $event.amount,
+                equallySplitted: $event.splitBill,
+                unequallySplitted: !$event.splitBill,
+                percentageOfSplitting: $event.percentage,
+                amountToBeReceived: (received / 100) * $event.amount,
+              },
+            ];
+          }
         }
       });
     }
+    console.log(this.allUserDetails);
   }
 
   constructor(
