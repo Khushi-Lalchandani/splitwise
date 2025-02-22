@@ -14,11 +14,8 @@ export class AddExpenseComponent implements OnInit {
   selectedEmails: string[] | any = [];
   dropdownSettings: IDropdownSettings = {};
   billDetails!: FormGroup;
-  percentage1!: number;
-  percentage2!: number;
-  percentage3!: number;
-  percentage4!: number;
-  percentage5!: number;
+
+  percentage: Array<{ email: string; perc: number }> = [];
 
   @Input() options: any;
   @Output() show = new EventEmitter<boolean>();
@@ -50,14 +47,17 @@ export class AddExpenseComponent implements OnInit {
         for (let i = 0; i < this.billDetails.value.email.length; i++) {
           this.billDetails.value.percentage.push(50);
         }
+      } else {
+        this.billDetails.value.percentage = [];
       }
     });
   }
   onSubmit() {
     console.log(this.billDetails.value);
-    if (this.billDetails.valid) {
+    if (this.billDetails.valid && this.percentage.length > 0) {
+      this.billDetails.value.percentage = this.percentage;
+      console.log(this.billDetails);
       this.details.emit(this.billDetails.value);
-
       this.onCancel();
     }
   }
@@ -73,5 +73,15 @@ export class AddExpenseComponent implements OnInit {
   }
   onDeSelectEmail($event: any) {
     console.log($event);
+  }
+  addPercentage(email: string, $event: any) {
+    if (this.percentage.length > 0) {
+      this.percentage = [
+        ...this.percentage,
+        { email: email, perc: Number($event.target.value) },
+      ];
+    } else {
+      this.percentage = [{ email: email, perc: Number($event.target.value) }];
+    }
   }
 }

@@ -56,41 +56,36 @@
           type="number"
           class="form-control"
           [id]="email"
-          [(ngModel)]="percentage1"
+          (blur)="addPercentage(email, $event)"
           *ngIf="i === 0"
-          [ngModelOptions]="{ standalone: true }"
         />
         <input
           type="number"
           class="form-control"
           [id]="email"
-          [(ngModel)]="percentage2"
+          (blur)="addPercentage(email, $event)"
           *ngIf="i === 1"
-          [ngModelOptions]="{ standalone: true }"
         />
         <input
           type="number"
           class="form-control"
           [id]="email"
-          [(ngModel)]="percentage3"
+          (blur)="addPercentage(email, $event)"
           *ngIf="i === 2"
-          [ngModelOptions]="{ standalone: true }"
         />
         <input
           type="number"
           class="form-control"
           [id]="email"
-          [(ngModel)]="percentage4"
+          (blur)="addPercentage(email, $event)"
           *ngIf="i === 3"
-          [ngModelOptions]="{ standalone: true }"
         />
         <input
           type="number"
           class="form-control"
           [id]="email"
-          [(ngModel)]="percentage5"
+          (blur)="addPercentage(email, $event)"
           *ngIf="i === 4"
-          [ngModelOptions]="{ standalone: true }"
         />
       </div>
     </div>

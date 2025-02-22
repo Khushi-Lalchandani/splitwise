@@ -5,7 +5,7 @@ export interface expenses {
   amountToBeReceived: number;
   equallySplitted: boolean;
   unequallySplitted: boolean;
-  percentageOfSplitting: number[];
+  percentageOfSplitting: any[];
 }
 export interface user {
   name: string;
