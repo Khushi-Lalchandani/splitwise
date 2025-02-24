@@ -1,9 +1,8 @@
-import { expenses } from './../user/user.model';
 import { UserService } from './../user/user.service';
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
-import { user } from '../user/user.model';
+import { expenses, user } from '../user/user.model';
 
 @Component({
   selector: 'app-main-page',
@@ -144,25 +143,44 @@ export class MainPageComponent implements OnInit {
         if (person.email === this.currentUserDetails[0].email) {
           const amountPaid = (paid * +$event.amount) / 100;
           const amountReceived = (received * +$event.amount) / 100;
-          console.log(amountPaid, amountReceived, +$event.amount);
+          // console.log(amountPaid, amountReceived, +$event.amount);
+
           if (person.expenses.length > 0) {
-            person.expenses = [
-              ...person.expenses,
+            const defaultExpenseValues = person.expenses.findIndex(
+              (expense) =>
+                expense.category === '' &&
+                expense.totalAmount === 0 &&
+                expense.amountToBeReceived === 0 &&
+                expense.amountToBePaid === 0 &&
+                expense.date === ''
+            );
+
+            const expenseValues = [
               {
                 category: $event.description,
-                amountToBePaid: (paid / 100) * $event.amount,
+                amountToBePaid: amountPaid,
                 totalAmount: $event.amount,
                 equallySplitted: $event.splitBill,
                 unequallySplitted: !$event.splitBill,
                 percentageOfSplitting: $event.percentage,
-                amountToBeReceived: (received / 100) * $event.amount,
+                amountToBeReceived: amountReceived,
+                date: new Date().toISOString(),
               },
             ];
+            console.log(defaultExpenseValues);
+            if (defaultExpenseValues !== -1) {
+              person.expenses = expenseValues;
+            } else {
+              person.expenses = [...person.expenses, ...expenseValues];
+            }
           }
         }
       });
     }
     console.log(this.allUserDetails);
+    this.userService
+      .updateData(this.allUserDetails)
+      .subscribe(() => this.dataUpdated.next(true));
   }
 
   constructor(

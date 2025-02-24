@@ -6,6 +6,7 @@ export interface expenses {
   equallySplitted: boolean;
   unequallySplitted: boolean;
   percentageOfSplitting: any[];
+  date: string;
 }
 export interface user {
   name: string;

@@ -100,7 +100,14 @@
       </div>
     </div>
   </div>
-  <div class="main_content">Content</div>
+  <div
+    class="main_content"
+    *ngFor="let expense of currentUserDetails[0].expenses"
+  >
+    <div *ngFor="let percentage of expense.percentageOfSplitting">
+      <p>{{ percentage.email }}</p>
+    </div>
+  </div>
 
   <div class="main_details">Details</div>
 </section>

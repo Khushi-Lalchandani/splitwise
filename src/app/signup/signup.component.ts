@@ -46,6 +46,7 @@ export class SignupComponent implements OnInit {
                   equallySplitted: false,
                   unequallySplitted: false,
                   percentageOfSplitting: [0],
+                  date: '',
                 },
               ],
               friends: [''],
