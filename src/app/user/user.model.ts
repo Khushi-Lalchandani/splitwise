@@ -13,4 +13,5 @@ export interface user {
   email: string;
   friends: any[];
   expenses: expenses[];
+  bankAccountDetails: [{ youPaid: number; youLent: number }];
 }

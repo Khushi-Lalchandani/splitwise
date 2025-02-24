@@ -149,10 +149,59 @@
     grid-column: 2/3;
     // background-color: blue;
     width: 100%;
-
     padding: 2rem;
-
     grid-row: 2/3;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    &-details {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      padding: 1rem;
+      background-color: #827b71;
+      align-items: center;
+      border-radius: 1.2rem;
+      color: #fff;
+
+      box-shadow: 0 10px 16px rgba(0, 0, 0, 0.2);
+      margin-bottom: 1rem;
+
+      &:hover {
+        box-shadow: inset 0 1rem 1rem rgba(#fff, 0.2);
+      }
+
+      &--amount {
+        display: flex;
+        flex-direction: column;
+
+        &-head {
+        }
+        &-text {
+        }
+      }
+
+      &--flex2 {
+        display: flex;
+        gap: 1.2rem;
+        &-date {
+        }
+        &-category {
+        }
+      }
+
+      &--icon {
+        height: 2rem;
+        width: 2rem;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
   }
 }
 

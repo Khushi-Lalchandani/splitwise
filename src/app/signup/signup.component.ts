@@ -50,6 +50,7 @@ export class SignupComponent implements OnInit {
                 },
               ],
               friends: [''],
+              bankAccountDetails: [{ youPaid: 0, youLent: 0 }],
             };
             // console.log(newUser);
 

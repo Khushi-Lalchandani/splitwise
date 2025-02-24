@@ -20,6 +20,7 @@ export class MainPageComponent implements OnInit {
   dataUpdated = new BehaviorSubject<boolean>(false);
   showAllFriends: boolean = false;
   showAddExpense: boolean = false;
+  bankDetails: Array<{ amountPaid: number; amountLent: number }> = [];
 
   ngOnInit(): void {
     if (this.isAuthenticated) {
@@ -143,10 +144,12 @@ export class MainPageComponent implements OnInit {
         if (person.email === this.currentUserDetails[0].email) {
           const amountPaid = (paid * +$event.amount) / 100;
           const amountReceived = (received * +$event.amount) / 100;
-          // console.log(amountPaid, amountReceived, +$event.amount);
-
-          if (person.expenses.length > 0) {
-            const defaultExpenseValues = person.expenses.findIndex(
+          console.log(amountPaid, amountReceived, +$event.amount);
+          if (!person.expenses) {
+            person.expenses = [];
+          }
+          if (person.expenses.length >= 0) {
+            const defaultExpenseIndex = person.expenses.findIndex(
               (expense) =>
                 expense.category === '' &&
                 expense.totalAmount === 0 &&
@@ -167,12 +170,15 @@ export class MainPageComponent implements OnInit {
                 date: new Date().toISOString(),
               },
             ];
-            console.log(defaultExpenseValues);
-            if (defaultExpenseValues !== -1) {
+
+            if (defaultExpenseIndex !== -1) {
               person.expenses = expenseValues;
             } else {
               person.expenses = [...person.expenses, ...expenseValues];
             }
+
+            // Adding bank account details
+            this.calcBankDetails(person);
           }
         }
       });
@@ -183,6 +189,66 @@ export class MainPageComponent implements OnInit {
       .subscribe(() => this.dataUpdated.next(true));
   }
 
+  deleteExpense(expense: expenses) {
+    console.log(expense);
+    console.log(this.currentUserDetails[0].expenses);
+
+    // Find the index of the expense to delete
+    const expenseIndex = this.currentUserDetails[0].expenses.findIndex(
+      (e: expenses) =>
+        e.category === expense.category && e.date === expense.date
+    );
+
+    if (expenseIndex !== -1) {
+      this.currentUserDetails[0].expenses.splice(expenseIndex, 1);
+      this.calcBankDetails(this.currentUserDetails[0]);
+
+      this.userService.updateData(this.allUserDetails).subscribe(() => {
+        // Trigger data update and refresh the view
+        this.dataUpdated.next(true);
+      });
+    }
+  }
+
+  calcBankDetails(person: user) {
+    let totalYouPaid = person.expenses.reduce(
+      (acc: number, expense: expenses) => {
+        return acc + expense.amountToBePaid;
+      },
+      0
+    );
+
+    let totalYouLent = person.expenses.reduce(
+      (acc: number, expense: expenses) => {
+        return acc + expense.amountToBeReceived;
+      },
+      0
+    );
+
+    if (!person.bankAccountDetails) {
+      // Initialize bankAccountDetails with a default object
+      person.bankAccountDetails = [
+        {
+          youPaid: 0,
+          youLent: 0,
+        },
+      ];
+    }
+
+    // Update the bank account details
+    const bankAccountDetails = {
+      youPaid: totalYouPaid,
+      youLent: totalYouLent,
+    };
+
+    if (person.bankAccountDetails.length > 0) {
+      person.bankAccountDetails[0] = bankAccountDetails;
+    } else {
+      person.bankAccountDetails.push(bankAccountDetails);
+    }
+
+    console.log(bankAccountDetails);
+  }
   constructor(
     private authService: AuthService,
     private userService: UserService

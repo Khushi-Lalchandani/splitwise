@@ -100,16 +100,47 @@
       </div>
     </div>
   </div>
-  <div
-    class="main_content"
-    *ngFor="let expense of currentUserDetails[0].expenses"
-  >
-    <div *ngFor="let percentage of expense.percentageOfSplitting">
-      <p>{{ percentage.email }}</p>
+  <div class="main_content">
+    <div
+      class="main_content-details"
+      *ngFor="let expense of currentUserDetails[0]?.expenses"
+    >
+      <div class="main_content-details--flex2">
+        <p class="main_content-details--flex2-date">
+          {{ expense.date | date : "dd/MM/yy" }}
+        </p>
+        <p class="main_content-details--flex2-category">
+          {{ expense.category }}
+        </p>
+      </div>
+      <div class="main_content-details--amount">
+        <span class="main_content-details--amount-head">You paid</span>
+
+        <span class="main_content-details--amount-text"
+          >₹ {{ expense.amountToBePaid }}</span
+        >
+      </div>
+      <div class="main_content-details--amount">
+        <span class="main_content-details--amount-head">You lent</span>
+        <span class="main_content-details--amount-text"
+          >₹ {{ expense.amountToBeReceived }}</span
+        >
+      </div>
+      <img
+        src="../../assets/img/bin.png"
+        alt="Delete icon"
+        class="main_content-details--icon"
+        (click)="deleteExpense(expense)"
+      />
     </div>
   </div>
 
-  <div class="main_details">Details</div>
+  <div class="main_details">
+    <div *ngFor="let amount of currentUserDetails[0]?.bankAccountDetails">
+      <p>{{ amount.youPaid }}</p>
+      <p>{{ amount.youLent }}</p>
+    </div>
+  </div>
 </section>
 <app-add-popup
   *ngIf="showAdd && allFriends"
