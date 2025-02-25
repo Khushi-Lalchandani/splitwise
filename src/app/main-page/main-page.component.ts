@@ -22,6 +22,7 @@ export class MainPageComponent implements OnInit {
   showAddExpense: boolean = false;
   showDeleteExpense: boolean = false;
   newExpenses!: expenses;
+  showBankDetails: boolean = false;
 
   ngOnInit(): void {
     if (this.isAuthenticated) {

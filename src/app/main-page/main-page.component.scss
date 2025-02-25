@@ -40,7 +40,7 @@
       // border-radius: 20px;
 
       &:hover {
-        background: linear-gradient(to right, #fff, #b80e99);
+        background: linear-gradient(to right, #fff, #e390d4);
         background-position: bottom right;
         background-size: 150% 150%;
 
@@ -57,17 +57,18 @@
     &-hidden {
       transition: top 1s cubic-bezier(0.17, 0.04, 0.03, 0.94);
       background-color: #fff;
-      // border-radius: 20px;
+
       padding: 1rem 0;
       &--friends {
-        border-bottom: 1px solid #000;
         display: flex;
+        margin-bottom: 1rem;
         align-items: center;
+        padding: 0 1rem;
         justify-content: space-between;
         font-size: 1.3rem;
 
         &:last-child {
-          border-bottom: none;
+          margin-bottom: 0;
         }
       }
     }
@@ -78,8 +79,7 @@
       text-transform: uppercase;
       padding: 1rem 0;
       margin-bottom: 1rem;
-      // border-bottom: 1px solid #bbb;
-      box-shadow: 0 0.5rem 1.2rem rgba(#bbb, 0.5);
+      box-shadow: 0 0.2rem 0.4rem rgba(#bbb, 0.5);
       a {
         color: #000;
         text-decoration: none;
@@ -129,7 +129,8 @@
     &-plus {
       text-wrap: nowrap;
       padding: 1rem;
-      background-color: rgb(232, 26, 26);
+      background-color: #085c67;
+      color: #fff;
       border-radius: 1.6rem;
       outline: none;
       border: none;
@@ -179,7 +180,6 @@
   }
   &_content {
     grid-column: 2/3;
-    // background-color: blue;
     width: 100%;
     padding: 2rem;
     grid-row: 2/3;

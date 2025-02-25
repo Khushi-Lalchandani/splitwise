@@ -7,7 +7,7 @@
       <a href="#">SplitBills</a>
     </div>
     <div class="main_sidebar-content">
-      <div class="main_sidebar-dash">
+      <div class="main_sidebar-dash" (click)="showBankDetails = true">
         <img
           src="../../assets/img/list.png"
           alt="Menu icon"
@@ -15,7 +15,7 @@
         />
         <p>Dashboard</p>
       </div>
-      <div class="main_sidebar-dash">
+      <div class="main_sidebar-dash" (click)="showBankDetails = false">
         <img
           src="../../assets/img/wall-clock.png"
           alt="Recent activity icon"
@@ -137,18 +137,20 @@
 
   <div class="main_details">
     <div *ngFor="let amount of currentUserDetails[0]?.bankAccountDetails">
-      <h3>Bank Details</h3>
-      <div class="main_details-lent">
-        <p class="main_details-lent-text">You lent</p>
-        <p class="main_details-lent-amount">
-          {{ amount.youLent }} <span>₹</span>
-        </p>
-      </div>
-      <div class="main_details-lent">
-        <p class="main_details-lent-text">You Paid</p>
-        <p class="main_details-lent-amount">
-          {{ amount.youPaid }} <span>₹</span>
-        </p>
+      <div *ngIf="showBankDetails">
+        <h3>Your total balance</h3>
+        <div class="main_details-lent">
+          <p class="main_details-lent-text">You are owed</p>
+          <p class="main_details-lent-amount">
+            {{ amount.youLent }} <span>₹</span>
+          </p>
+        </div>
+        <div class="main_details-lent">
+          <p class="main_details-lent-text">You Paid</p>
+          <p class="main_details-lent-amount">
+            {{ amount.youPaid }} <span>₹</span>
+          </p>
+        </div>
       </div>
     </div>
   </div>
