@@ -20,7 +20,8 @@ export class MainPageComponent implements OnInit {
   dataUpdated = new BehaviorSubject<boolean>(false);
   showAllFriends: boolean = false;
   showAddExpense: boolean = false;
-  bankDetails: Array<{ amountPaid: number; amountLent: number }> = [];
+  showDeleteExpense: boolean = false;
+  newExpenses!: expenses;
 
   ngOnInit(): void {
     if (this.isAuthenticated) {
@@ -190,24 +191,8 @@ export class MainPageComponent implements OnInit {
   }
 
   deleteExpense(expense: expenses) {
-    console.log(expense);
-    console.log(this.currentUserDetails[0].expenses);
-
-    // Find the index of the expense to delete
-    const expenseIndex = this.currentUserDetails[0].expenses.findIndex(
-      (e: expenses) =>
-        e.category === expense.category && e.date === expense.date
-    );
-
-    if (expenseIndex !== -1) {
-      this.currentUserDetails[0].expenses.splice(expenseIndex, 1);
-      this.calcBankDetails(this.currentUserDetails[0]);
-
-      this.userService.updateData(this.allUserDetails).subscribe(() => {
-        // Trigger data update and refresh the view
-        this.dataUpdated.next(true);
-      });
-    }
+    this.showDeleteExpense = true;
+    this.newExpenses = expense;
   }
 
   calcBankDetails(person: user) {
@@ -248,6 +233,27 @@ export class MainPageComponent implements OnInit {
     }
 
     console.log(bankAccountDetails);
+  }
+
+  onDeleteExpense($event: any) {
+    console.log($event);
+    if (this.newExpenses && Object.keys(this.newExpenses).length > 0) {
+      const expenseIndex = this.currentUserDetails[0].expenses.findIndex(
+        (e: expenses) =>
+          e.category === this.newExpenses.category &&
+          e.date === this.newExpenses.date
+      );
+
+      if (expenseIndex !== -1) {
+        this.currentUserDetails[0].expenses.splice(expenseIndex, 1);
+        this.calcBankDetails(this.currentUserDetails[0]);
+
+        this.userService.updateData(this.allUserDetails).subscribe(() => {
+          // Trigger data update and refresh the view
+          this.dataUpdated.next(true);
+        });
+      }
+    }
   }
   constructor(
     private authService: AuthService,

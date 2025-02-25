@@ -15,6 +15,7 @@ import { AddPopupComponent } from './add-popup/add-popup.component';
 import { DeletePopupComponent } from './delete-popup/delete-popup.component';
 import { AddExpenseComponent } from './add-expense/add-expense.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { ExpenseDeleteComponent } from './expense-delete/expense-delete.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     AddPopupComponent,
     DeletePopupComponent,
     AddExpenseComponent,
+    ExpenseDeleteComponent,
   ],
   imports: [
     BrowserModule,
