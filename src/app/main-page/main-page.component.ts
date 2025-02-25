@@ -256,6 +256,40 @@ export class MainPageComponent implements OnInit {
       }
     }
   }
+
+  // Function to get the amount paid by the current user
+  getCurrentUserPaidAmount(): number {
+    return this.currentUserDetails[0]?.expenses.reduce(
+      (acc: number, expense: expenses) => {
+        // Sum the amounts paid by the current user
+        if (
+          expense.percentageOfSplitting.some(
+            (percent) => percent.email === this.currentUserDetails[0].email
+          )
+        ) {
+          const amountPaid =
+            (expense.amountToBePaid *
+              expense.percentageOfSplitting.find(
+                (p) => p.email === this.currentUserDetails[0].email
+              )?.perc || 0) / 100;
+          acc += amountPaid;
+        }
+        return acc;
+      },
+      0
+    );
+  }
+
+  // Function to get the friend's name and the respective amount
+  getFriendName(email: string): string {
+    const friend = this.allUserDetails.find((user) => user.email === email);
+    return friend ? friend.name : 'Unknown Friend';
+  }
+  getFriendAmount(perc: any, expense: expenses): number {
+    const amount = (perc.perc / 100) * expense.totalAmount;
+    return amount;
+  }
+
   constructor(
     private authService: AuthService,
     private userService: UserService

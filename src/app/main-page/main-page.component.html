@@ -140,16 +140,43 @@
       <div *ngIf="showBankDetails">
         <h3>Your total balance</h3>
         <div class="main_details-lent">
-          <p class="main_details-lent-text">You are owed</p>
-          <p class="main_details-lent-amount">
+          <p class="main_details-lent--text">You are owed</p>
+          <p class="main_details-lent--amount">
             {{ amount.youLent }} <span>₹</span>
           </p>
         </div>
         <div class="main_details-lent">
-          <p class="main_details-lent-text">You Paid</p>
-          <p class="main_details-lent-amount">
+          <p class="main_details-lent--text">You Paid</p>
+          <p class="main_details-lent--amount">
             {{ amount.youPaid }} <span>₹</span>
           </p>
+        </div>
+      </div>
+
+      <div *ngIf="!showBankDetails">
+        <!-- show details in statements -->
+
+        <p class="main_details-header">Your Expenses Summary</p>
+        <div
+          class="main_details-lent"
+          *ngFor="let expense of currentUserDetails[0].expenses"
+        >
+          <p class="main_details-lent--category">{{ expense.category }}</p>
+
+          <!-- show other friends -->
+
+          <div *ngFor="let perc of expense.percentageOfSplitting">
+            <p class="main_details-lent--summary">
+              {{
+                getFriendName(perc.email) === currentUserDetails[0].name
+                  ? "You Paid"
+                  : getFriendName(perc.email) + " Owes"
+              }}:
+            </p>
+            <p class="main_details-lent--money">
+              ₹ {{ getFriendAmount(perc, expense) }}
+            </p>
+          </div>
         </div>
       </div>
     </div>

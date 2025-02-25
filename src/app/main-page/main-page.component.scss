@@ -146,6 +146,11 @@
     padding: 2rem;
     grid-row: 1/-1;
 
+    &-header {
+      font-size: 1.8rem;
+      text-transform: uppercase;
+    }
+
     &-lent {
       width: 100%;
       border-radius: 1.2rem;
@@ -164,17 +169,31 @@
         margin-bottom: 0;
       }
 
-      &-text {
+      &--text {
         color: #777;
         text-transform: uppercase;
         font-size: 1rem;
       }
-      &-amount {
+      &--amount {
         span {
           font-size: 1.4rem;
         }
         font-size: 2rem;
         color: #085c67;
+      }
+
+      &--category {
+        font-size: 1.8rem;
+
+        text-transform: uppercase;
+        color: #085c67;
+      }
+
+      &--summary {
+      }
+
+      &--money {
+        color: #777;
       }
     }
   }
